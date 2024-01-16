@@ -1,0 +1,134 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    background: #17193d;
+    line-height: 1.6;
+    margin: 0; 
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_inner {
+    display: flex;
+    position: absolute;
+
+    top: 30%; 
+    left: 50%;
+    transform: translate(-50%, -185%);
+    z-index: 1000;
+}
+
+/* HeaderUnder */
+.header_under {
+    display: flex;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -290%);
+    z-index: 1000;
+}
+
+.all_task , .completed_task {
+    margin: 0 6px;
+    color: #1a62af;
+    font-family: inherit;
+}
+
+
+/* Button */
+.btn ,.btn_block3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0px 7px;
+  padding: 0;
+  border-width: 0;
+  border-color: transparent;
+  background: transparent;
+  font-weight: 300;
+  cursor: pointer;
+  position: relative;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 5px 38px;
+  overflow: hidden;
+  border-width: 0;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.18), 0 1px 5px 0 rgba(0,0,0,0.15);
+  color: #1a62af;
+  text-transform: uppercase;
+  -webkit-transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.btn:hover {
+
+    background-color: transparent;
+    color: black;
+    box-shadow: 0 5px 11px 0 rgba(24, 49, 189, 0.726), 0 4px 15px 0 rgba(0,0,0,.15);
+    transition: box-shadow .4s ease-out
+}
+
+
+/* Input */
+.line_input {
+    display: block;
+    width: 100%;
+    height: calc(1.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4b4f53;
+    background-color:transparent;
+    background-clip: padding-box;
+    border: 1px solid #101229;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .line_input:hover {
+    border: 1px solid #1c6fca;
+  }
+
+  .line_input::placeholder {
+    color: #314e6b;
+    font-family: inherit;
+  }
+
+
+  /* Block_2 Intro */
+
+  .intro {
+    position: absolute;
+    top: 70%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+  .input-text{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    padding: 3.375rem 10.75rem;
+  }
+
+
+  .date {
+    display: flex;
+    position: absolute;
+    right: -6%;
+    color: rgb(121, 130, 151);
+  }
+
