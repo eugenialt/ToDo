@@ -48,7 +48,6 @@ body {
     justify-content: center;
 
     margin: 0px 7px;
-  padding: 0;
   border-width: 0;
   border-color: transparent;
   background: transparent;
@@ -110,25 +109,37 @@ body {
 
   /* Block_2 Intro */
 
-  .intro {
+  .form {
     position: absolute;
     top: 70%; 
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
 }
-  .input-text{
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    padding: 3.375rem 10.75rem;
-  }
 
+.task_item {
+  padding: 10px;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 10px;
+  border: #101229 1px solid;
+  border-radius: 5px;
+  height: 100px;
+  width: 610px;
+  color: #1c6fca;
+  font-size: 13px;
+  font-family: inherit;
+  align-items: center;
+  justify-items: center;
+}
 
-  .date {
-    display: flex;
-    position: absolute;
-    right: -6%;
-    color: rgb(121, 130, 151);
-  }
+.task_item .checkbox {
+  grid-column: 1;
+  justify-self: center;
+}
+
+.task_item .current_data {
+  grid-column: 2;
+}
 

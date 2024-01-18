@@ -39,7 +39,6 @@ button.forEach(button => {
   headerInner.appendChild(button); // Добававляем каждую кнопку внутрь элемента
 } );
 
-
 function insertLineInput(placeholderText,prevElement,nextElement ) {
   const lineInput = document.createElement('input');
   lineInput.className = 'line_input';
@@ -82,52 +81,59 @@ if (buttonUnderHeader.length >= 2) {
 insertLineInput('Search...', buttonUnderHeader[1]);
 
 
-// окно todo
-const intro = document.createElement('div');
-intro.className = 'intro';
-header.append(intro);
-
-const block = document.createElement('div');
-block.className = 'block';
-intro.append(block);
-
-const block_message = document.createElement('div');
-block_message.className = 'block_message';
-block.append(block_message);
-
-
 // кнопки todo --3--
-const buttonBlock = createButton(2, 'btn'); 
+const form = document.createElement('form');
+form.className = 'form';
+root.append(form)
 
-buttonBlock.forEach(button => {
-  block.appendChild(button);
-});
+const tasks = [
+  {
+  id: self.crypto.randomUUID(),
+  task: 'Выучить JS',
+  isCompleted: false,
+  date: new Date().toLocaleDateString('ru-RU', { // либо так new Date().toLocaleDateString()
+    year: '2-digit',
+    month: 'short',
+    day: '2-digit'
+  })
+ },
+ {
+  id: self.crypto.randomUUID(),
+  task: 'Выучить JS',
+  isCompleted: false,
+  date: new Date().toLocaleDateString()
+ },
+]
 
-if (buttonBlock.length >= 1) {
-  buttonBlock[1].textContent = '✓';
-} 
-if (buttonBlock.length >= 2) {
-  buttonBlock[0].textContent = '✗';
-} 
+ 
 
-function addInput(placeholderText, prevElement, nextElement) {
-  const lineInput = document.createElement('input');
-  lineInput.className = 'line_input input-text';
-  lineInput.placeholder = placeholderText;
-  prevElement.parentNode.insertBefore(lineInput, nextElement);
+const createInput = (type, placeholder, name) => {
+  const input = document.createElement('input');
+  input.type = type;
+  input.placeholder = placeholder;
+  input.name = name;
+  return input;
 }
-addInput('ToDo Text', buttonBlock[0], buttonBlock[1]);
 
+const blockTask = document.createElement('div');
+blockTask.className = 'block_task';
+form.append(blockTask);
+const createTaskItem = (text,isCompleted, id, date) => {
+  const taskItem = document.createElement('div');
+  const checkbox = createInput('checkbox', '', 'checkbox');
+  checkbox.checked = isCompleted;
+  checkbox.classList.add('checkbox');
+  const currenData = document.createElement('span');
+  currenData.className = 'curren_data';
+  currenData.textContent = date;
+  taskItem.className = 'task_item';
+  taskItem.id = id;
+  taskItem.textContent = text;
+  taskItem.append(checkbox, currenData);
+  return taskItem;
+}
 
-// работа над временем
-const dataDiv = document.createElement('div');
-dataDiv.className = 'data_div'
-block.append(dataDiv);
-
-const date = new Date(2024, 1, 16, 18, 59, 59, 999);
-const dateObj = document.createElement('time');
-dateObj.className = 'date';
-dateObj.textContent = date.toLocaleString();
-
-
-dataDiv.append(dateObj)
+tasks.forEach(task => {
+  const taskItem = createTaskItem(task.task, task.isCompleted, task.id, task.date);
+  blockTask.append(taskItem);
+})
