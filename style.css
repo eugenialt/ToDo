@@ -50,7 +50,7 @@ body {
     margin: 0px 7px;
   border-width: 0;
   border-color: transparent;
-  background: transparent;
+  background: #15183b;
   font-weight: 300;
   cursor: pointer;
   position: relative;
@@ -73,7 +73,7 @@ body {
 
     background-color: transparent;
     color: black;
-    box-shadow: 0 5px 11px 0 rgba(24, 49, 189, 0.726), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(7, 42, 238, 0.726), 0 4px 15px 0 rgba(0,0,0,.15);
     transition: box-shadow .4s ease-out
 }
 
@@ -143,3 +143,55 @@ body {
   grid-column: 2;
 }
 
+
+/* Checkbox */
+
+
+.check_input {
+  position: absolute;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.check_box {
+  position: absolute;
+  margin-left: -5.9em;
+  margin-top: 0.3em;
+  width: 1em;
+  height: 1em;
+  /* border-radius: 0.5em; */
+  background-color: #101229;
+  box-shadow: 0 0 0.1em #3990ee;
+}
+
+.span_img {
+  height: 1em;
+}
+/* Checkbox checked */
+
+
+.check_input:checked + .check_box   {
+  background-color: #050c13;
+  background-image: url(img/icons8-галочка.svg);
+  box-shadow: 0 5px 11px 0 rgba(24, 49, 189, 0.726), 0 4px 15px 0 rgba(0,0,0,.15);
+  transition: box-shadow .4s ease-out
+}
+
+/* Focused */
+
+.check_input:hover + .check_box {
+  cursor: pointer;
+  box-shadow: 0 0 0.1em #3990ee, 0 0 0.4em #c7ccce;
+}
+
+/* Disabled  */
+
+.check_input:disabled + .check_box{
+  box-shadow: 0 0 0.1em #464c52;
+}
+
+.check_input:checked:disabled + .check_box{
+  background-color: #464c52;
+}
