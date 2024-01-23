@@ -195,3 +195,10 @@ body {
 .check_input:checked:disabled + .check_box{
   background-color: #464c52;
 }
+
+.block_task {
+  border: #101229 1px solid;
+  /* overflow: auto;
+  width: auto;
+  height: auto; */
+}

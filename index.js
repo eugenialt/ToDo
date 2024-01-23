@@ -164,7 +164,19 @@ const task = {
   id: self.crypto.randomUUID(),
 };
 
+// LocalStorage
+localStorage.setItem('todos', JSON.stringify({}));
 
+// получаем данные из LocalStorage
+function getDataLocalStorage(key) {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];  // если data истенное значение, то выполняется код после ?, если нет, то выполняется код после :
+}
+
+// записываем данные в LocalStorage
+function setDataLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
 
 form.append(tasksContainer);
 const renderTasks = () => {
