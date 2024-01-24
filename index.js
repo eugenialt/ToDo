@@ -47,11 +47,10 @@ function insertLineInput(placeholderText,prevElement,nextElement ) {
   lineInput.className = 'line_input';
   lineInput.placeholder = placeholderText;
   prevElement.parentNode.insertBefore(lineInput, nextElement);
+  return lineInput;
 }
 
-insertLineInput('Enter ToDo...', button[1], button[2]);
-
-
+const inputToDo = insertLineInput('Enter ToDo...', button[1], button[2]);
 // шапка приложения --2--
 const headerUnder = document.createElement('div')
 headerUnder.className = 'header_under';
@@ -119,6 +118,7 @@ const createTaskItem = (text, isCompleted, id, date) => {
     if (checkbox.checked) {
       label.style.textDecoration = 'line-through';
       taskItem.style.backgroundColor = '#101229';
+      taskItem.style.boxShadow = '0 20px 28px rgba(0,0,0,0.25), 0 15px 10px rgba(0,0,0,0.22)';
     } else {
       label.style.textDecoration = 'none';
       taskItem.style.backgroundColor = 'transparent';
@@ -157,26 +157,19 @@ const createTaskItem = (text, isCompleted, id, date) => {
   return taskItem;
 }
 
-const task = {
-  task: "New task",
-  isCompleted: false,
-  date: new Date().toLocaleDateString(),
-  id: self.crypto.randomUUID(),
-};
-
 // LocalStorage
 localStorage.setItem('todos', JSON.stringify({}));
 
 // получаем данные из LocalStorage
 function getDataLocalStorage(key) {
-  const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : [];  // если data истенное значение, то выполняется код после ?, если нет, то выполняется код после :
+  return JSON.parse(localStorage.getItem(key) ?? '[]');
 }
 
 // записываем данные в LocalStorage
-function setDataLocalStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+function setDataLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }
+
 
 form.append(tasksContainer);
 const renderTasks = () => {
@@ -197,8 +190,9 @@ const renderTasks = () => {
 button[2].addEventListener('click', addTask);
 
 function addTask (){
-const taskItem = createTaskItem(task.task, task.isCompleted, task.id, task.date);
-blockTask.append(taskItem);
+  const inputText = inputToDo.value; // Получаем значение из input
+  const newTaskItem = createTaskItem(inputText, false, self.crypto.randomUUID(), new Date().toLocaleDateString()); // Создаем новую карточку задачи
+  blockTask.append(newTaskItem); // Добавляем карточку в блок задач
 }
 
 // Delete all task -- удаляем все задачи
@@ -215,26 +209,23 @@ button[0].addEventListener('click', deleteAllTask);
 
 
 // Delete task -- удаляем определённую задачу
-const deleteTask = (id) => {
+const deleteTask = (event) => {
+  
   const tasks = getDataLocalStorage('tasks');
-  if (tasks) {
-    const updatedTasks = tasks.filter((item) => item.id !== id);
-    setDataLocalStorage('tasks', updatedTasks);
-    renderTasks();
-  } else {
-    console.error('No task');
-  }
+  if (tasks.length === 1) {
+    localStorage.removeItem('tasks');
+  } 
+  const updatedTasks = tasks.filter((item) => item.id !== id);
+  setDataLocalStorage('tasks', updatedTasks);
 }
 
 const handlerDeleteTask = (event) => {
   const { target } = event;
-  
-  if (target.classList.contains('cross_task') || target.classList.contains('checkbox')) {
+  const parent = target.closest('div')
+  if (target.classList.contains('cross_task') || target.classList.contains('check_box')) {
     if (confirm('Delete task?')) {
-      const taskCard = target.closest('.task_item'); // Получаем родительскую карточку
-      const taskId = taskCard.id;
-      deleteTask(taskId); 
-      taskCard.remove(); // Удаляем карточку из DOM
+      deleteTask(parent.id); 
+      renderTasks();
     }
-  }
+  } 
 }
