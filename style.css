@@ -8,30 +8,22 @@ body {
 
 .container {
     width: 100%;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
 }
 
 .header_inner {
-    display: flex;
-    position: absolute;
-
-    top: 30%; 
-    left: 50%;
-    transform: translate(-50%, -185%);
-    z-index: 1000;
+  display: grid;
+  grid-template-columns: repeat(4,25%);
+  margin: 30px;
+  gap: 8px;
 }
 
 /* HeaderUnder */
 .header_under {
-    display: flex;
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -290%);
-    z-index: 1000;
+    display: grid;
+    grid-template-columns: repeat(5,20%);
 }
 
 .all_task , .completed_task {
@@ -50,7 +42,7 @@ body {
     margin: 0px 7px;
   border-width: 0;
   border-color: transparent;
-  background: #15183b;
+  background: #1b2050;
   font-weight: 300;
   cursor: pointer;
   position: relative;
@@ -156,9 +148,11 @@ body {
 }
 
 .check_box {
-  position: absolute;
-  margin-left: -5.9em;
-  margin-top: 0.3em;
+  display: flex;
+  position: relative;
+  top: -17px;
+  bottom: 0;
+  left: -16px;
   width: 1em;
   height: 1em;
   /* border-radius: 0.5em; */
@@ -182,6 +176,7 @@ body {
 /* Focused */
 
 .check_input:hover + .check_box {
+
   cursor: pointer;
   box-shadow: 0 0 0.1em #3990ee, 0 0 0.4em #c7ccce;
 }
